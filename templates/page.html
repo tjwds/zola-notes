@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block meta_content %}
+    {% if page.title %}
+    <title>{{page.title}} — Joe Woods</title>
+    <meta name="twitter:title" content="{{page.title}} — Joe Woods">
+    <meta property="og:title" content="{{page.title}} — Joe Woods" />
+    {% else %}
+    <title>Joe Woods — Notes</title>
+    <meta name="twitter:title" content="Joe Woods — Notes">
+    <meta property="og:title" content="Joe Woods — Notes" />
+    {% endif %}
+    {% if page.description %}
+    <meta name="description" content="{{ page.description | safe }}" />
+    <meta name="twitter:description" content="{{ page.description | safe }}">
+    <meta property="og:description" content="{{ page.description | safe }}" />
+    {% endif %}
+{% endblock meta_content %}
+
+{% block content %}
+    {% if page.date %}<p class="published-on">Published on {{ page.date }}</p>{% endif %}
+    {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
+    {{ page.content | safe }}
+{% endblock content %}
