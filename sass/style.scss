@@ -29,7 +29,6 @@ a.active {
 
 .header-name {
     font-size: 2em;
-    // color: #9604f2;
     color: aliceblue;
 }
 
@@ -68,17 +67,14 @@ h1 {
 }
 
 h2 {
-    // color: rgba(0, 0, 0, 0.8);
     font-size: 1.75rem;
 }
 
 h3 {
-    // color: rgba(0, 0, 0, 0.6);
     font-size: 1.5rem;
 }
 
 h4, h5, h6 {
-    // color: rgba(0, 0, 0, 0.4);
     font-size: 1.4rem;
 }
 
@@ -88,9 +84,6 @@ h4, h5, h6 {
 }
 
 p {
-    // letter-spacing: -0.0025em;
-    // line-height: 1.58;
-    // color: rgba(0, 0, 0, 0.84);
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -114,9 +107,6 @@ pre {
 }
 
 code {
-    // background: #fee;
-    // padding: 0.2rem;
-    // color:#600;
     padding: 0.3rem;
     border-radius: 0.3rem;
 }
@@ -155,7 +145,6 @@ figure {
         font-size: 1rem;
         font-weight: 400;
         width: 100%;
-        // color: rgba(0, 0, 0, 0.6);
     }
 }
 
