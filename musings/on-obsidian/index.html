@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <link rel="stylesheet" href="https://notes.joewoods.dev/style.css">
+    
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Joe Woods — Blog" href="https://blog.joewoods.dev/rss.xml" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@tjwds">
+    <meta name="twitter:creator" content="@tjwds">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://notes.joewoods.dev//musings/on-obsidian/" />
+    <meta property="og:site_name" content="Joe Woods — Blog" />
+
+    
+    
+    <title>on obsidian.md — Joe Woods</title>
+    <meta name="twitter:title" content="on obsidian.md — Joe Woods">
+    <meta property="og:title" content="on obsidian.md — Joe Woods" />
+    
+    
+
+</head>
+<body>
+    <header>
+        <nav role="navigation">
+            <ul>
+                
+                    
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;music&#x2F;" >
+                                music
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;musings&#x2F;" >
+                                musings
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;projects&#x2F;" >
+                                projects
+                            </a>
+                        </li>
+                    
+                
+            </ul>
+        </nav>
+    </header>
+    <article>
+        
+    <p class="published-on">Published on 2020-11-15</p>
+    <h1>on obsidian.md</h1>
+    <p>Obsidian didn't work for me.  I gave it a drive for about a month or so, attempting to slightly modify my workflow to fit it, but ultimately, I'm going to move back to a slightly modified version of my existing note-taking routine:  VSCode.</p>
+<p>When I first checked out Obsidian, I thought, &quot;sweet, this will help me be more organized without having to really change what I'm doing.&quot;  Starting up with Obsidian is just as easy as opening the folder full of markdown files that I'm already using.  So, really, other than reading documentation, all I had to do was download it and get started.</p>
+<p>But this doesn't actually leverage what Obsidian can do for you.  I attempted to reorganize the way that I took notes to some degree, breaking off more projects and landing zones from my daily notes document into their own space.  It didn't really work, though; I ended up with a sort of half-baked zettelkasten that felt all over the place.  The last thing I'd want is for the tool that helps me organize my thoughts to feel unorganized.</p>
+<p>So, to me, Obsidian felt like it tried to do too many things at once, and not very well.  It's not an &quot;IDE&quot;; there are plugins, but they just don't really match what I get out of writing plain markdown in VSCode.  For example, I just opened on of my markdown files that I'd written in Obsidian in VSCode, and immediately saw all of the trailing whitespace that I'd just left hanging around highlighted in bright red.  And, of course, the code snippets I'd embedded in the first file I'd opened had syntax highlighting in them, unlike in Obsidian!</p>
+<p>Also, I just didn't really feel like I needed Yet Another Electron Application open to take notes.  Switching between writing notes and writing code should not be distracting — doing so with VSCode is, in my mind, seamless.  Switching between Obsidian and VSCode still always required a context switch for me.</p>
+<p>The other benefits I thought Obsidian could have brought to the table just didn't work out for me, either.  Obsidian has a unified aesthetic, and seen from far away, it is quite pretty.  But that got stale for me pretty fast, and I found myself again preferring my hyper-personalized VSCode setup.  I found the places where Obsidian took over and formatted your markdown for you just not worth it — I guess I just prefer headers to be boldly highlighted, but not actually bigger when I'm writing documents.  At the end of the day, I just found my VSCode theme more delightful to look at.  I <a href="https://github.com/tjwds/obsidian-minimal-iceburg">even tried theming Obsidian</a>, but it still just couldn't hold up.</p>
+<p>There are very many valid complaints to be made about Microsoft, but VSCode is licensed under MIT.  Microsoft seems to have found shepherding this editor that I really, really like profitable, but maybe a lot of that is because they're big name players that can afford to give the project the attention it deserves.  Obsidian is closed-source, and though the way they seek to gain a profit off the editor isn't creepy yet, I could see it easily growing that way.</p>
+<h2 id="concrete-ui-complaints">Concrete UI complaints</h2>
+<p>So:  that was a lot of abstract complaints, but there were quite a few day-to-day UI quirks about Obsidian that made me quit it.  Some of these are just an artifact of my having gained muscle memory for one editor and then attempting to switch to another, but others, I think, are valid complaints, and even those that are <em>clearly</em> a me problem could be resolved by letting things be a little more configurable.</p>
+<h3 id="i-just-don-t-get-the-way-that-changing-between-files-works">I just don't get the way that changing between files works</h3>
+<p>I could not wrap my head around pressing ⌘O to bring up the file switcher, but this is probably because Obsidian's &quot;action&quot; command pallet shortcut is ⌘P, which is subtly different from VSCode, where the command pallet is in &quot;file&quot; mode on ⌘P and &quot;action&quot; mode with ⌘⇧P (or, my preferred ⌘P then typing <code>&gt;</code>).  I know that this is mostly a me problem, but this seems like a pretty hard break from the way any other editor does things.</p>
+<h3 id="new-files">New files</h3>
+<p>I kept pressing ⌘N to create a new file and ⌘V to dump my clipboard buffer in one single action, because this is muscle memory for me at this point, but if you do this in Obsidian, you'll end up with your paste buffer as the file name, and you can't just ⌘A to select and delete your mistake, because you can't ⌘A within the title.</p>
+<h3 id="folders">Folders</h3>
+<p>Folder support in Obsidian is not great.  You can either have all new files be created at the top level, or be put into the same directory as the file you just had open (?!).  This means that I was just constantly losing files, turning to my terminal to try to find where the heck the file actually went.  VSCode's file browser does this pretty great thing where it'll focus the file location in the file explorer when you focus on a file in your editor; it seems to me the Obsidian <em>must</em> get this feature in order for me to be able to actually use it.  Trying to find a file among many, many folders all containing many, many files was infinitely frustrating.</p>
+<h3 id="vscode-s-just-better-about-workspaces-and-opening-files">VSCode's just better about workspaces and opening files</h3>
+<p>I am constantly reaching for the terminal command <code>open .</code>.  As far as I know, you can't do that with Obsidian; nor is it really designed for opening arbitrary files to edit outside of the context of a project.</p>
+<p>I have a lot of workspace-specific configurations in VSCode, like the extension Peacock, which allows me to say, mark an editor as the bright blue &quot;this is the active repository&quot; editor so that I can very easily distinguish it from a reference repository I have open.  Yeah, I have multiple checkouts of a few projects, I know, I know.</p>
+<h3 id="editing-often-feels-clunky">Editing often feels clunky</h3>
+<p>Writing just didn't feel like a pleasant experience to me with Obsidian.  I honestly don't have a lot of concrete data to point to <em>why</em>, it just didn't feel good!</p>
+<p>The only actual issue I can remember is the frustrating ambiguity as to what an asterisk is about to do in markdown.  I make a lot of unordered lists when organizing projects, notes, or just writing about things — this article, for example, was written in my typical writing style of having a big ol' unordered list at the bottom that I slowly turned into paragraphs.</p>
+<p>Wrapping something in asterisks in markdown creates emphasis, though, so Obsidian will add another asterisk <em>after</em> your current cursor location when you type one.  But, if your line starts with an asterisk and you press enter, Obsidian will create a new line for you that starts with an asterisk.</p>
+<p>Maybe this is the behavior that other people want, but it often broke my flow as I was writing.</p>
+<h3 id="panes-and-tabs">Panes and tabs</h3>
+<p>I also just found the pane model frustrating.  Obsidian (as far as I know) doesn't support tabs, which means in order to open another file, it must be in another pane, or it'll close the editor you had open in order to open the new file.  To keep a file open, you can pin it, and then opening a new file will create a new split pane, which is kind of nice, but again, I just prefer the way that VSCode does it.</p>
+<h3 id="organization">Organization</h3>
+<p>I'd prefer if Obsidian didn't keep around empty files with the title &quot;Untitled&quot; — I would often find myself opening and then closing a new file, so at the end of the day, I'd have at least one completely empty &quot;Untitled.md&quot; file to delete from my notes.</p>
+<h3 id="other-thoughts">Other thoughts</h3>
+<ul>
+<li>VSCode and git go hand-in-hand, and I like using git to back up and see how my notes have changed over time.  VSCode makes unstaged changes very visible, whereas Obsidian doesn't!</li>
+</ul>
+
+
+    </article>
+    <!-- Privacy-oriented tracking pixel — I do not share information about you,
+         I'm treating your data how I'd like to be treated, etc. -->
+    <!-- <img id="tracking-pixel" src="https://track.joewoods.dev/blog/track.gif?cache=27304743000" alt=""/> -->
+</body>
+</html>

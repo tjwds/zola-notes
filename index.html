@@ -5,51 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    {% block css %}
-    <link rel="stylesheet" href="{{ get_url(path="style.css") | safe }}">
-    {% endblock css %}
-    {% block fonts %}
-    {% endblock fonts %}
+    
+    <link rel="stylesheet" href="https://notes.joewoods.dev/style.css">
+    
+    
+    
     <link rel="alternate" type="application/rss+xml" title="Joe Woods — Blog" href="https://blog.joewoods.dev/rss.xml" />
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@tjwds">
     <meta name="twitter:creator" content="@tjwds">
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{config.base_url | safe}}/{{current_path | safe}}" />
+    <meta property="og:url" content="https://notes.joewoods.dev//" />
     <meta property="og:site_name" content="Joe Woods — Blog" />
 
-    {% block meta_content %}
+    
     <title>Joe Woods — Notes</title>
     <meta name="twitter:title" content="Joe Woods — Blog">
     <meta property="og:title" content="Joe Woods — Blog" />
-    {% endblock meta_content %}
+    
 </head>
 <body>
     <header>
         <nav role="navigation">
             <ul>
-                {% block menu %}
-                    {% set index = get_section(path="_index.md") %}
-                    {% for s in index.subsections %}
-                        {% set subsection = get_section(path=s) %}
+                
+                    
+                    
+                        
                         <li>
-                            <a href="{{ subsection.permalink }}" {% if current_path == subsection.path %}class="active"{% endif %}>
-                                {{ subsection.title }}
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;music&#x2F;" >
+                                music
                             </a>
                         </li>
-                    {% endfor %}
-                {% endblock menu %}
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;musings&#x2F;" >
+                                musings
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;projects&#x2F;" >
+                                projects
+                            </a>
+                        </li>
+                    
+                
             </ul>
         </nav>
     </header>
     <article>
-        {% block content %}
+        
         <div></div>
-        {% endblock content %}
+        
     </article>
     <!-- Privacy-oriented tracking pixel — I do not share information about you,
          I'm treating your data how I'd like to be treated, etc. -->
-    <!-- <img id="tracking-pixel" src="https://track.joewoods.dev/blog/track.gif?cache={{now() | date(format='%S%f')}}" alt=""/> -->
+    <!-- <img id="tracking-pixel" src="https://track.joewoods.dev/blog/track.gif?cache=27304743000" alt=""/> -->
 </body>
 </html>
