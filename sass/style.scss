@@ -109,6 +109,12 @@ pre {
 code {
     padding: 0.3rem;
     border-radius: 0.3rem;
+    border: 1px solid;
+}
+
+pre code {
+    padding: 0;
+    border: none;
 }
 
 a {
