@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <link rel="stylesheet" href="https://notes.joewoods.dev/style.css">
+    
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Joe Woods — Notes" href="https://notes.joewoods.dev/rss.xml" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@tjwds">
+    <meta name="twitter:creator" content="@tjwds">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://notes.joewoods.dev/programming/devkinsta-upload-limit/" />
+    <meta property="og:site_name" content="Joe Woods — Notes" />
+
+    
+    
+    <title>Bypassing DevKinsta&#x27;s 128 MB upload restriction — Joe Woods</title>
+    <meta name="twitter:title" content="Bypassing DevKinsta&#x27;s 128 MB upload restriction — Joe Woods">
+    <meta property="og:title" content="Bypassing DevKinsta&#x27;s 128 MB upload restriction — Joe Woods" />
+    
+    
+
+</head>
+<body>
+    <header>
+        <nav role="navigation">
+            <ul>
+                
+                    
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;music&#x2F;" >
+                                music
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;musings&#x2F;" >
+                                musings
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;programming&#x2F;" >
+                                programming
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;projects&#x2F;" >
+                                projects
+                            </a>
+                        </li>
+                    
+                        
+                        <li>
+                            <a href="https:&#x2F;&#x2F;notes.joewoods.dev&#x2F;roundup&#x2F;" >
+                                roundup
+                            </a>
+                        </li>
+                    
+                
+            </ul>
+        </nav>
+    </header>
+    <article>
+        
+    <p class="published-on">Published on 2021-05-22</p>
+    <h1>Bypassing DevKinsta&#x27;s 128 MB upload restriction</h1>
+    <p>I'm working on a WordPress site that has a <em>lot</em> of content in it.  The thing is, there's now more than one person looking at the staging server I've set up on a random DigitalOcean droplet… so I wanted to be able to do some theme development locally, then eventually plop the new theme on the staging server.</p>
+<p>I figured I'd give <a href="https://kinsta.com/devkinsta/">DevKinsta</a> a shout.  I haven't had a lot of luck with Docker, but DevKinsta's branding is really cool, so that alone made me download it and fire it up.</p>
+<p>The problem I ran into:  I'm using the &quot;All-in-One WP Migration&quot; plugin to back up the work on this staging server, right?  &quot;I'll just pop that backup into my local devkinsta WordPress instance and it should just work, right?&quot;</p>
+<p>Wrong!</p>
+<p>Everywhere, I see the dreaded maximum upload file size:  128 MB.</p>
+<p>Normally, that would be a lot of bytes, but it turns out, this site is huge — our take-out clocks in at just over 162 MB.  Wolfram Alpha informs me that that's about a quarter of the capacity of a compact disk.</p>
+<p>So:  how do we solve this?  DevKinsta has, at its core, a bunch of Docker containers talking to each other.  We need to update values in two of those containers:  <code>devkinsta_nginx</code> and <code>devkinsta_fpm</code>.</p>
+<p>Fortunately, you can execute arbitrary commands in Docker containers from the command line.</p>
+<h2 id="update-the-nginx-config">Update the nginx config</h2>
+<p>First, let's invoke:</p>
+<p><code>docker exec -i devkinsta_nginx cat /etc/nginx/nginx.conf &gt; temp.conf</code></p>
+<p>Edit temp.conf, find the line which reads <code>client_max_body_size 128M;</code> and bump it up to, say, 256M.</p>
+<p>Pipe your edited file back into the Docker container:</p>
+<p><code>docker exec -i devkinsta_nginx sh -c 'cat &gt; /etc/nginx/nginx.conf' &lt; temp.conf</code></p>
+<h2 id="update-the-fpm-config">Update the fpm config</h2>
+<p>Next, let's work on fpm.  This is the one I was least sure about — if anyone thinks that any of these steps aren't actually necessary, please let me know!</p>
+<p><strong>Note:  I'm running php 7.4</strong> in DevKinsta — you may need to change <code>7.4</code> in all of the commands below to whichever version you're running.</p>
+<p>Let's do the same thing to get the file we need to edit:</p>
+<p><code>docker exec -i devkinsta_fpm cat /etc/php/7.4/fpm/php.ini &gt; temp.ini</code></p>
+<p>(or, again, substitute in whichever version you're running for <code>7.4</code>)</p>
+<p>Edit temp.ini and make sure these values are set high enough:  <code>upload_max_filesize</code>, <code>memory_limit</code>, <code>post_max_size</code>.  I set them all to <code>256M</code>.</p>
+<p>Put it back:</p>
+<p><code>docker exec -i devkinsta_fpm sh -c 'cat &gt; /etc/php/7.4/fpm/php.ini' &lt; temp.ini</code></p>
+<p>I believe DevKinsta also set up an additional configuration file that we need to change too:</p>
+<p><code>docker exec -i devkinsta_fpm cat /etc/php/7.4/fpm/conf.d/tuning.ini &gt; temp.ini</code></p>
+<p>Update those three values (<code>upload_max_filesize</code>, <code>memory_limit</code>, <code>post_max_size</code>) here as well.</p>
+<p>Put it back:</p>
+<p><code>docker exec -i devkinsta_fpm sh -c 'cat &gt; /etc/php/7.4/fpm/conf.d/tuning.ini' &lt; temp.ini</code></p>
+<h2 id="restart-everything">Restart everything</h2>
+<p>Finally, just restart some stuff:</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">docker exec -i devkinsta_fpm service php7.4-fpm reload
+docker exec -i devkinsta_nginx service nginx reload
+</span></pre>
+<p>Go back to your local DevKinsta WordPress instance, refresh the page, and you should see your updated file size limit!</p>
+<h2 id="that-s-all">That's all</h2>
+<p>I'm not going to lie, figuring this out made me feel <em>really</em> great.  Look, I mostly write javascript — I don't really look at servers that often, so this was a big one for me!</p>
+<p>Kinsta, if you're listening, any chance you could bump this limit up a bit? ;-)</p>
+<p>Thanks for reading!  Please reach out with any comments at joewoods at fastmail.com.</p>
+
+
+    </article>
+    <!-- Privacy-oriented tracking pixel — I do not share information about you,
+         I'm treating your data how I'd like to be treated, etc. -->
+    <img id="tracking-pixel" src="https://track.joewoods.dev/blog/track.gif?cache=55187793771" alt=""/>
+</body>
+</html>
